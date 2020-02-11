@@ -8,15 +8,15 @@ renamed as (
 
     select
 
-        customer_id as account_id,
+        customer_id         as account_id,
 
-        name as account_name,
+        name                as account_name,
 
-        currency_code as currency_code,
-        date_time_zone as date_time_zone,
+        currency_code       as currency_code,
+        date_time_zone      as date_time_zone,
 
-        can_manage_clients as can_manage_clients,
-        test_account as test_account
+        can_manage_clients  as can_manage_clients,
+        test_account        as test_account
 
     from source
 
