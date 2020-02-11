@@ -9,7 +9,7 @@ renamed as (
     select
 
         -- PK
-        id as ad_campaign_id,
+        id as campaign_id,
 
         -- FKeys
         _sdc_customer_id::int as account_id,
@@ -24,10 +24,10 @@ renamed as (
         serving_status as serving_status,
         ad_serving_optimization_status as optimization_status,
         advertising_channel_type as advertising_channel_type,
-        campaign_trial_type as trial_type
+        campaign_trial_type as trial_type,
 
-        start_date as start_date,
-        end_date as end_date,
+        start_date as start_at,
+        end_date as end_at,
 
         -- JSONB arrays in case we need them to filter by label or setting value
         labels as labels,
