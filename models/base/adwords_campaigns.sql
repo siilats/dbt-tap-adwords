@@ -31,7 +31,7 @@ renamed as (
 
         -- JSONB arrays in case we need them to filter by label or setting value
         labels as labels,
-        settings as settings,
+        settings as settings
 
     from source
 

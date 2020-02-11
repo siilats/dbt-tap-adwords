@@ -50,7 +50,6 @@ renamed as (
         gmail_saves as gmail_saves,
         gmail_forwards as gmail_forwards,
 
-
         -- Additional info
         keyword_id as keyword_id,
         keyword_state as keyword_status,
@@ -70,5 +69,5 @@ renamed as (
 select * from renamed
 
 order by
-  report_date,
-  keyword
+  report_date asc,
+  keyword asc
