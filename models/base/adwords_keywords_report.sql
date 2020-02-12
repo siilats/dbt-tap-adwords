@@ -41,8 +41,8 @@ renamed as (
         match_type                           as match_type,
         destination_url                      as destination_url,
 
-        top_of_page_cpc                      as top_of_page_cpc,
-        first_page_cpc                       as first_page_cpc,
+        {{ tap_adwords.performance_report_cost('top_of_page_cpc') }} as top_of_page_cpc,
+        {{ tap_adwords.performance_report_cost('first_page_cpc') }} as first_page_cpc,
 
         -- Account Timezone and last time this report was updated
         time_zone                            as account_time_zone,

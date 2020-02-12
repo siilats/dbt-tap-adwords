@@ -19,7 +19,8 @@
 
         active_view_viewable_impressions           as active_view_viewable_impressions,
         active_view_measurable_impr                as active_view_measurable_impr,
-        active_view_measurable_cost                as active_view_measurable_cost,
+
+        {{ tap_adwords.performance_report_cost('active_view_measurable_cost') }} as active_view_measurable_cost,
 
         gmail_clicks_to_website                    as gmail_clicks_to_website,
         gmail_saves                                as gmail_saves,
@@ -27,16 +28,22 @@
 
         -- Metrics Required for compliance with RMF requirements
         impr_abs_top                               as impr_abs_top,
-        active_view_avg_cpm                        as active_view_avg_cpm,
+
+        {{ tap_adwords.performance_report_cost('active_view_avg_cpm') }} as active_view_avg_cpm,
+
         active_view_viewable_ctr                   as active_view_viewable_ctr,
         active_view_measurable_impr_impr           as active_view_measurable_impr_impr,
         active_view_viewable_impr_measurable_impr  as active_view_viewable_impr_measurable_impr,
         all_conv_rate                              as all_conv_rate,
         all_conv_value                             as all_conv_value,
-        avg_cost                                   as avg_cost,
-        avg_cpc                                    as avg_cpc,
+
+        {{ tap_adwords.performance_report_cost('avg_cost') }} as avg_cost,
+        {{ tap_adwords.performance_report_cost('avg_cpc') }} as avg_cpc,
+
         avg_cpe                                    as avg_cpe,
-        avg_cpm                                    as avg_cpm,
+
+        {{ tap_adwords.performance_report_cost('avg_cpm') }} as avg_cpm,
+
         avg_cpv                                    as avg_cpv,
         pages_session                              as pages_session,
         avg_position                               as avg_position,
@@ -47,8 +54,10 @@
         click_assisted_conv_value                  as click_assisted_conv_value,
         conv_rate                                  as conv_rate,
         total_conv_value                           as total_conv_value,
-        cost_all_conv                              as cost_all_conv,
-        cost_conv                                  as cost_conv,
+
+        {{ tap_adwords.performance_report_cost('cost_all_conv') }} as cost_all_conv,
+        {{ tap_adwords.performance_report_cost('cost_conv') }} as cost_conv,
+
         cost_conv_current_model                    as cost_conv_current_model,
         cross_device_conv                          as cross_device_conv,
         ctr                                        as ctr,
