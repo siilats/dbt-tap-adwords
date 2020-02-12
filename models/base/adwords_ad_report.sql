@@ -27,7 +27,22 @@ renamed as (
         -- Core Metrics
         clicks                              as clicks,
 
-        round(cost::int * 1.0 / 1000000, 6) as cost,
+        -- Values of cost can be:
+        -- a) a money amount in micros
+        -- b) "auto: x" or "auto" if Google Ads is automatically setting the bid via the chosen bidding strategy
+        -- c) "--" if this field is a bid and no bid applies to the row.
+        case
+            -- Never trust APIs, let's make sure that we got a number here (intentional check for number, not int)
+            when trim(from cost) ~ '^\d+(.\d+)?$'
+                then round( trim(from cost)::int * 1.0 / 1000000, 6)
+            when cost = '--' or cost = 'auto'
+                then NULL
+            when cost like 'auto:%' and (trim(from substring(cost from 6)) ~ '^\d+(.\d+)?$')
+                then round( trim(from substring(cost from 6))::int * 1.0 / 1000000, 6)
+            else
+                NULL
+        end                                 as cost,
+
         currency                            as currency,
 
         impressions                         as impressions,
