@@ -68,6 +68,7 @@ renamed as (
         call_to_action_text_multi_asset_responsive_display as call_to_action_text_multi_asset_responsive_display,
         promotion_text_multi_asset_responsive_display      as promotion_text_multi_asset_responsive_display,
 
+        -- Account Timezone and last time this report was updated
         time_zone                           as account_time_zone,
 
         _sdc_report_datetime                as updated_at
