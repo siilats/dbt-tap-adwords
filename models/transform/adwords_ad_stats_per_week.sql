@@ -58,8 +58,6 @@ group by
   ad_status,
   currency
 
-having SUM(impressions) is not NULL
-
 order by
   report_date_iso_year,
   report_date_week,

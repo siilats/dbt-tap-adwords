@@ -1,7 +1,7 @@
 with report as (
 
      select *
-     from {{ref('adwords_ad_report')}}
+     from {{ref('adwords_keywords_report')}}
 
 )
 
@@ -17,9 +17,12 @@ select
   ad_group_id,
   ad_group_name,
 
-  ad_id,
-  ad_type,
-  ad_status,
+  keyword_id,
+  keyword,
+  keyword_status,
+
+  top_of_page_cpc,
+  first_page_cpc,
 
   currency,
 
@@ -31,7 +34,7 @@ select
   (
     report_date, ' | ',
     account_name, ' | ', campaign_name, ' | ', ad_group_name, ' | ',
-    ad_type, '(', ad_status, ')'
+    keyword, '(', keyword_status, ')'
   ) as label,
 
   -- Metrics for the report
@@ -39,10 +42,14 @@ select
 
 from report
 
+-- Keyword Reports return one row per day even for keywords without any impressions
+-- Skip the noise from the long tail for campaigns with too many keywords defined
+where impressions is not NULL
+
 order by
   report_date,
   account_name,
   campaign_name,
   ad_group_name,
-  ad_type,
-  ad_status
+  keyword,
+  keyword_status

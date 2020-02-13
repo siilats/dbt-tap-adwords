@@ -30,8 +30,6 @@ select
 
 from report
 
-where impressions is not NULL
-
 order by
   report_date,
   account_name,
