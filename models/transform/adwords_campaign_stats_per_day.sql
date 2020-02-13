@@ -7,26 +7,22 @@ with report as (
 
 select
 
-  -- The Account, Campaign and Ad Group this report is for
+  -- The Account and Campaign this report is for
   account_id,
   account_name,
 
   campaign_id,
   campaign_name,
 
-  ad_group_id,
-  ad_group_name,
-
   currency,
 
   -- The day (date) this report is for
   report_date,
 
-  -- Generate a nice label: "2020-01-16 | Account | Campaign | Ad Group"
+  -- Generate a nice label: "2020-01-16 | Account | Campaign"
   CONCAT
   (
-    report_date, ' | ',
-    account_name, ' | ', campaign_name, ' | ', ad_group_name
+    report_date, ' | ', account_name, ' | ', campaign_name
   ) as label,
 
   -- Metrics for the report
@@ -39,5 +35,4 @@ where impressions is not NULL
 order by
   report_date,
   account_name,
-  campaign_name,
-  ad_group_name
+  campaign_name
