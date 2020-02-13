@@ -7,7 +7,7 @@ with report as (
 
 select
 
-  -- The Account, Campaign, Ad Group, Ad this report is for
+  -- The Account, Campaign, Ad Group this report is for
   account_id,
   account_name,
 
@@ -16,10 +16,6 @@ select
 
   ad_group_id,
   ad_group_name,
-
-  ad_id,
-  ad_type,
-  ad_status,
 
   currency,
 
@@ -30,8 +26,7 @@ select
   CONCAT
   (
     report_date, ' | ',
-    account_name, ' | ', campaign_name, ' | ', ad_group_name, ' | ',
-    ad_type, '(', ad_status, ')'
+    account_name, ' | ', campaign_name, ' | ', ad_group_name
   ) as label,
 
   -- Metrics for the report
@@ -45,6 +40,4 @@ order by
   report_date,
   account_name,
   campaign_name,
-  ad_group_name,
-  ad_type,
-  ad_status
+  ad_group_name
