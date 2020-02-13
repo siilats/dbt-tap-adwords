@@ -8,49 +8,32 @@ renamed as (
 
     select
 
-        -- FKeys to base entities
-        _sdc_customer_id::int                as account_id,
-        account                              as account_name,
-
-        campaign_id                          as campaign_id,
-        campaign                             as campaign_name,
-        campaign_state                       as campaign_status,
-
-        ad_group_id                          as ad_group_id,
-        ad_group                             as ad_group_name,
-        ad_group_state                       as ad_group_status,
-
-        client_name                          as client_name,
+        -- Dimensions common in all Performance Reports
+        {{ tap_adwords.performance_report_dimensions() }},
 
         -- Report Segments
         day::date                            as report_date,
         keyword                              as keyword,
 
-        -- Core Metrics
-        clicks                               as clicks,
+        -- Metrics common in all Performance Reports
+        {{ tap_adwords.performance_report_metrics() }},
 
-        round( cost::int * 1.0 / 1000000, 6) as cost,
-        currency                             as currency,
+        -- Metrics available only in the Keywords Performance Report
+        ad_relevance_hist                    as ad_relevance_hist,
+        landing_page_experience_hist         as landing_page_experience_hist,
+        qual_score_hist                      as qual_score_hist,
+        expected_clickthrough_rate_hist      as expected_clickthrough_rate_hist,
+        search_abs_top_is                    as search_abs_top_is,
+        search_lost_abs_top_is_budget        as search_lost_abs_top_is_budget,
+        search_lost_top_is_budget            as search_lost_top_is_budget,
+        search_exact_match_is                as search_exact_match_is,
+        search_impr_share                    as search_impr_share,
+        search_lost_abs_top_is_rank          as search_lost_abs_top_is_rank,
+        search_lost_is_rank                  as search_lost_is_rank,
+        search_lost_top_is_rank              as search_lost_top_is_rank,
+        search_top_is                        as search_top_is,
 
-        impressions                          as impressions,
-        interactions                         as interactions,
-
-        engagements                          as engagements,
-        conversions                          as conversions,
-
-        -- Additional Metrics
-        all_conv                             as all_conversions,
-        views                                as video_views,
-
-        active_view_viewable_impressions     as active_view_viewable_impressions,
-        active_view_measurable_impr          as active_view_measurable_impr,
-        active_view_measurable_cost          as active_view_measurable_cost,
-
-        gmail_clicks_to_website              as gmail_clicks_to_website,
-        gmail_saves                          as gmail_saves,
-        gmail_forwards                       as gmail_forwards,
-
-        -- Additional info
+        -- Additional info about the Keywords
         keyword_id                           as keyword_id,
         keyword_state                        as keyword_status,
 
@@ -58,6 +41,10 @@ renamed as (
         match_type                           as match_type,
         destination_url                      as destination_url,
 
+        {{ tap_adwords.performance_report_cost('top_of_page_cpc') }} as top_of_page_cpc,
+        {{ tap_adwords.performance_report_cost('first_page_cpc') }} as first_page_cpc,
+
+        -- Account Timezone and last time this report was updated
         time_zone                            as account_time_zone,
 
         _sdc_report_datetime                 as updated_at
