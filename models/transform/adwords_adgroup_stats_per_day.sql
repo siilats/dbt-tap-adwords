@@ -22,7 +22,7 @@ select
   -- The day (date) this report is for
   report_date,
 
-  -- Generate a nice label: "2020-01-16 | Account | Campaign | Ad Group"
+  -- Generate a descriptive label: "2020-01-16 | Account | Campaign | Ad Group"
   CONCAT
   (
     report_date, ' | ',

@@ -19,7 +19,7 @@ select
   -- The start of the week this report is for
   date_trunc('week', MIN(report_date))::date as week_start,
 
-  -- Generate a nice label: "[2019-12-09,2019-12-15] | Account | Campaign"
+  -- Generate a descriptive label: "[2019-12-09,2019-12-15] | Account | Campaign"
   CONCAT
   (
     '[',
