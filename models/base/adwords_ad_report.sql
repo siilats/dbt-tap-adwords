@@ -12,7 +12,7 @@ renamed as (
         {{ tap_adwords.performance_report_dimensions() }},
 
         -- Report Segments
-        day::date                           as report_date,
+        {{ tap_adwords.performance_report_day_segment() }},
 
         -- Metrics common in all Performance Reports
         {{ tap_adwords.performance_report_metrics() }},
