@@ -14,16 +14,15 @@ renamed as (
         -- Report Segments
         {{ tap_adwords.performance_report_day_segment() }},
 
+        network                              as network,
+        device                               as device,
+
         keyword                              as keyword,
 
         -- Metrics common in all Performance Reports
         {{ tap_adwords.performance_report_metrics() }},
 
         -- Metrics available only in the Keywords Performance Report
-        ad_relevance_hist                    as ad_relevance_hist,
-        landing_page_experience_hist         as landing_page_experience_hist,
-        qual_score_hist                      as qual_score_hist,
-        expected_clickthrough_rate_hist      as expected_clickthrough_rate_hist,
         search_abs_top_is                    as search_abs_top_is,
         search_lost_abs_top_is_budget        as search_lost_abs_top_is_budget,
         search_lost_top_is_budget            as search_lost_top_is_budget,
