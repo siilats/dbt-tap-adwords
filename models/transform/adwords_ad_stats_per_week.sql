@@ -36,7 +36,7 @@ select
       (date_trunc('week', MIN(report_date)) + '6 days')::date,
     '] | ',
     account_name , ' | ' , campaign_name , ' | ' , ad_group_name , ' | ' ,
-    ad_type , '(' , ad_status , ')'
+    ad_type , '(' , ad_id , ')'
   ) as label,
 
   -- Aggregate Metrics for the report
@@ -65,4 +65,5 @@ order by
   campaign_name,
   ad_group_name,
   ad_type,
+  ad_id,
   ad_status
