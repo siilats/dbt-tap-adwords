@@ -7,11 +7,11 @@
     case
         -- Never trust APIs, let's make sure that we got a number here (intentional check for number, not int)
         when trim(from {{ column_name }}) ~ '^\d+(.\d+)?$'
-            then round( trim(from {{ column_name }})::int * 1.0 / 1000000, 6)
+            then round( trim(from {{ column_name }})::numeric / 1000000, 6)
         when {{ column_name }} = '--' or {{ column_name }} = 'auto'
             then NULL
         when {{ column_name }} like 'auto:%' and (trim(from substring({{ column_name }} from 6)) ~ '^\d+(.\d+)?$')
-            then round( trim(from substring({{ column_name }} from 6))::int * 1.0 / 1000000, 6)
+            then round( trim(from substring({{ column_name }} from 6))::numeric / 1000000, 6)
         else
             NULL
     end

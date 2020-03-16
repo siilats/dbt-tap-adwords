@@ -7,19 +7,12 @@ with report as (
 
 select
 
-  -- The Account, Campaign, Ad Group, Ad this report is for
+  -- The Account and Campaign this report is for
   account_id,
   account_name,
 
   campaign_id,
   campaign_name,
-
-  ad_group_id,
-  ad_group_name,
-
-  ad_id,
-  ad_type,
-  ad_status,
 
   currency,
 
@@ -27,12 +20,15 @@ select
   to_char(MIN(report_date), 'YYYY-MM') as month,
   date_trunc('month', MIN(report_date))::date as month_start,
 
-  -- Generate a descriptive label: "2020-02 | Account | Campaign | Ad Group | Ad Type (Enabled)"
+  -- The Network and Device segments
+  network,
+  device,
+
+  -- Generate a descriptive label: "2020-02 | Search Network | Computers | Account | Campaign"
   CONCAT
   (
     to_char(MIN(report_date), 'YYYY-MM'), ' | ',
-    account_name , ' | ' , campaign_name , ' | ' , ad_group_name , ' | ' ,
-    ad_type , '(' , ad_id , ')'
+    network, ' | ', device, ' | ', account_name , ' | ' , campaign_name
   ) as label,
 
   -- Aggregate Metrics for the report
@@ -43,23 +39,18 @@ from report
 group by
   report_date_year,
   report_date_month,
+  network,
+  device,
   account_id,
   account_name,
   campaign_id,
   campaign_name,
-  ad_group_id,
-  ad_group_name,
-  ad_id,
-  ad_type,
-  ad_status,
   currency
 
 order by
   report_date_year,
   report_date_month,
+  network,
+  device,
   account_name,
-  campaign_name,
-  ad_group_name,
-  ad_type,
-  ad_id,
-  ad_status
+  campaign_name

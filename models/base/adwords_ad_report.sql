@@ -14,6 +14,9 @@ renamed as (
         -- Report Segments
         {{ tap_adwords.performance_report_day_segment() }},
 
+        network                             as network,
+        device                              as device,
+
         -- Metrics common in all Performance Reports
         {{ tap_adwords.performance_report_metrics() }},
 

@@ -19,10 +19,14 @@ select
   -- The day (date) this report is for
   report_date,
 
-  -- Generate a descriptive label: "2020-01-16 | Account | Campaign"
+  -- The Network and Device segments
+  network,
+  device,
+
+  -- Generate a descriptive label: "2020-01-16 | Search Network | Computers | Account | Campaign"
   CONCAT
   (
-    report_date, ' | ', account_name, ' | ', campaign_name
+    report_date, ' | ', network, ' | ', device, ' | ', account_name, ' | ', campaign_name
   ) as label,
 
   -- Metrics for the report
@@ -32,6 +36,8 @@ from report
 
 group by
   report_date,
+  network,
+  device,
   account_id,
   account_name,
   campaign_id,
@@ -40,5 +46,7 @@ group by
 
 order by
   report_date,
+  network,
+  device,
   account_name,
   campaign_name

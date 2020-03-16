@@ -38,13 +38,28 @@ select
   ) as label,
 
   -- Metrics for the report
-  {{ tap_adwords.core_ad_metrics() }}
+  {{ tap_adwords.core_ad_metrics_aggregates() }}
 
 from report
 
+group by
+  report_date,
+  account_id,
+  account_name,
+  campaign_id,
+  campaign_name,
+  ad_group_id,
+  ad_group_name,
+  keyword_id,
+  keyword,
+  keyword_status,
+  top_of_page_cpc,
+  first_page_cpc,
+  currency
+
 -- Keyword Reports return one row per day even for keywords without any impressions
 -- Skip the noise from the long tail for campaigns with too many keywords defined
-where impressions is not NULL
+having SUM(impressions) is not NULL
 
 order by
   report_date,

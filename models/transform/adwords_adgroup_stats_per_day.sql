@@ -30,9 +30,19 @@ select
   ) as label,
 
   -- Metrics for the report
-  {{ tap_adwords.core_ad_metrics() }}
+  {{ tap_adwords.core_ad_metrics_aggregates() }}
 
 from report
+
+group by
+  report_date,
+  account_id,
+  account_name,
+  campaign_id,
+  campaign_name,
+  ad_group_id,
+  ad_group_name,
+  currency
 
 order by
   report_date,
